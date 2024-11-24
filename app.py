@@ -1,16 +1,20 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from langchain.document_loaders import PyPDFLoader
-from langchain.vectorstores import FAISS
-from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain_community.document_loaders import PyPDFLoader  # 更新導入
+from langchain_community.vectorstores import FAISS  # 更新導入
+from langchain_community.embeddings import OpenAIEmbeddings  # 更新導入
 from langchain.chains import ConversationalRetrievalChain
-from langchain.chat_models import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI  # 更新導入
 from langchain.memory import ConversationBufferMemory
 from dotenv import load_dotenv  # 引入 dotenv
 import os
+from pyngrok import conf, ngrok  # 引入 pyngrok
 
 # 載入 .env 檔案中的環境變數
 load_dotenv()
+
+# 設定 ngrok 的路徑
+conf.get_default().ngrok_path = "/opt/homebrew/bin/ngrok"
 
 # 建立 Flask 應用程式
 app = Flask(__name__)
@@ -20,7 +24,7 @@ CORS(app)
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
 if not openai_api_key:
-    raise ValueError("金鑰未正確設定。請確保.env檔案中包含 OAAK")
+    raise ValueError("金鑰未正確設定。請確保 .env 檔案中包含 OPENAI_API_KEY")
 
 # 載入 PDF 文件
 pdf_loader = PyPDFLoader("/Users/gaomenglin/Desktop/university-query-platform/cycu.pdf")
@@ -61,5 +65,11 @@ def ask_question():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# 啟動 Ngrok
 if __name__ == "__main__":
+    # 建立 Ngrok 隧道，將本地 8080 端口暴露給外部
+    public_url = ngrok.connect(8000)
+    print(f" * Ngrok tunnel \"{public_url}\" -> http://127.0.0.1:8000")
+
+    # 啟動 Flask 伺服器
     app.run(host="0.0.0.0", port=8000)
