@@ -68,8 +68,8 @@ def ask_question():
 # 啟動 Ngrok
 if __name__ == "__main__":
     # 建立 Ngrok 隧道，將本地 8080 端口暴露給外部
-    public_url = ngrok.connect(8000)
-    print(f" * Ngrok tunnel \"{public_url}\" -> http://127.0.0.1:8000")
+    public_url = ngrok.connect(8080)
+    print(f" * Ngrok tunnel \"{public_url}\" -> http://127.0.0.1:8080")
 
     # 啟動 Flask 伺服器
-    app.run(host="0.0.0.0", port=8000)
+    app.run(host="0.0.0.0", port=8080)

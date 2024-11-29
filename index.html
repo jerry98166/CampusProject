@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Window</title>
+    <title>中原大學報你知</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">  <!-- 連接CSS -->
+    <link rel="stylesheet" href="style_test.css">  <!-- 連接CSS -->
+    <!--link rel="stylesheet" href="style_mobile.css"--> ＃手機版視窗
 </head>
 <body>
 
@@ -15,24 +17,25 @@
     <div class="chat-container">
         <div class="chat-header">
             <img src="cycu_image.png" alt="Chat Header Image" class="header-image">
-            <h2>Chat Bot</h2>
+            <h2>中原大學報你知</h2>
             <button class="theme-toggle" id="theme-toggle">
-                <i class="fas fa-moon"></i> Switch Theme
+                <i class="fas fa-moon"></i> 切換主題
             </button>
         </div>
         <div class="chat-box" id="chat-box">
             <!-- 對話內容將動態插入 -->
         </div>
         <div class="input-area">
-            <input type="text" id="user-input" placeholder="Enter your message..." class="form-control">
+            <input type="text" id="user-input" placeholder="請輸入您的問題..." class="form-control">
             <button id="send-btn" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+            <button id="voice-btn" class="btn btn-secondary"><i class="fas fa-microphone"></i></button>
         </div>
         <div id="loading" class="loading">
-            <i class="fas fa-spinner fa-spin"></i> Loading...
+            <i class="fas fa-spinner fa-spin"></i> 正在加載...
         </div>
     </div>
 </div>
 
-<script src="script.js"></script>  <!-- 連接JavaScript -->
+<script src="script_test.js"></script>  <!-- 連接JavaScript -->
 </body>
 </html>
