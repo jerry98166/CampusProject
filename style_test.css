@@ -161,37 +161,25 @@ h2 {
 @media (max-width: 768px) {
     .chat-container {
         width: 100%;
-        padding: 10px;
-        margin: 0;
+        padding: 0; /* 移除內邊距 */
+        margin: 0; /* 移除外邊距 */
         border-radius: 0;
-    }
-
-    .chat-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .chat-header h2 {
-        font-size: 1.5rem;
-    }
-
-    .chat-box {
-        height: 50vh;
     }
 
     .input-area {
         flex-direction: column;
         gap: 5px;
-        margin-left: 0;
-        margin-right: 0;
+        margin: 0; /* 移除左右外邊距 */
     }
 
     #user-input, #send-btn, #voice-btn {
-        width: 100%;
+        width: 100%; /* 確保每個元素佔滿整個寬度 */
         margin: 0;
     }
 
-    #send-btn, #voice-btn {
-        margin-top: 10px;
+    .chat-box {
+        margin: 0; /* 移除聊天框的外邊距 */
+        padding: 10px; /* 可保留內容的內邊距 */
+        width: 100%; /* 讓寬度貼合整個螢幕 */
     }
 }
