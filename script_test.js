@@ -28,7 +28,7 @@ async function sendMessage() {
 
         // 發送問題到後端 API
         try {
-            const response = await fetch('https://0a9b-140-135-12-187.ngrok-free.app/ask', {  // 替換為你的後端API URL
+            const response = await fetch('https://f860-140-135-12-187.ngrok-free.app/ask', {  // 替換為你的後端API URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
