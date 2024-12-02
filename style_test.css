@@ -177,8 +177,6 @@ h2 {
     .input-area {
         flex-direction: column;
         gap: 5px;
-        width: 100%; /* 確保寬度填滿螢幕 */
-        margin: 0; /* 移除左右邊距 */
     }
 
     #user-input, #send-btn, #voice-btn {
@@ -187,5 +185,17 @@ h2 {
 
     #send-btn, #voice-btn {
         margin-top: 5px;
+    }
+}
+
+/* 大螢幕電腦版響應式設計 */
+@media (min-width: 1024px) {
+    .chat-container {
+        width: 50%; /* 限制寬度為螢幕的一半 */
+        border-radius: 15px;
+    }
+
+    .chat-box {
+        border-radius: 10px;
     }
 }
