@@ -28,7 +28,7 @@ if not openai_api_key:
     raise ValueError("金鑰未正確設定。請確保 .env 檔案中包含 OPENAI_API_KEY")
 
 # 向量資料庫檔案路徑
-vector_store_path = "/path/to/your/vector_store"
+vector_store_path = "/Users/gaomenglin/Desktop/university-query-platform/vector_store"
 
 # 檢查向量資料庫是否已經存在
 if os.path.exists(vector_store_path):
@@ -37,7 +37,7 @@ if os.path.exists(vector_store_path):
     logging.info("讀取已儲存的向量資料庫")
 else:
     # 載入 PDF 文件
-    pdf_loader = PyPDFLoader("/path/to/your/pdf.pdf")
+    pdf_loader = PyPDFLoader("/Users/gaomenglin/Desktop/university-query-platform/cycu.pdf")
     documents = pdf_loader.load()
 
     # 建立向量資料庫
