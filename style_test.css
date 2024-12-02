@@ -4,67 +4,50 @@
     padding: 0;
 }
 
-body {
-    font-family: 'Arial', sans-serif;
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* 修改對齊位置 */
-    height: 100vh;
-    position: relative;
-    overflow-x: hidden; /* 隱藏多餘的水平內容 */
+    overflow: hidden; /* 隱藏超出部分 */
 }
 
-.background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #74ebd5, #acb6e5);
-    z-index: 1;
 }
 
 .container {
-    width: 100%;
-    height: 100%;
-    padding: 0;
+    width: 100vw; /* 占滿視窗寬度 */
+    height: 100vh; /* 占滿視窗高度 */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: relative;
-    z-index: 2;
 }
 
 .chat-container {
-    width: 100%;
-    max-width: 600px; /* 限制最大寬度，中央對齊 */
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 10px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    margin: 0 auto; /* 水平置中 */
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+    flex: 1; /* 自適應高度 */
     display: flex;
     flex-direction: column;
-    height: auto;
-    min-height: 90%; /* 增加最小高度 */
     justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 0;
+    padding: 20px;
+    overflow: hidden;
 }
 
 .chat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 h2 {
-    margin: 0;
     font-weight: bold;
     color: #333;
+    font-size: 1.5rem;
 }
 
 .theme-toggle {
@@ -76,20 +59,19 @@ h2 {
 }
 
 .chat-box {
+    flex: 1; /* 填滿剩餘空間 */
     background-color: #f9f9f9;
-    flex-grow: 1;
-    overflow-y: auto;
     padding: 10px;
-    border-radius: 10px;
     border: 1px solid #ced4da;
+    border-radius: 0;
+    overflow-y: auto;
 }
 
 .input-area {
     display: flex;
     gap: 10px;
-    padding: 0 10px;
-    margin-bottom: 10px;
-    width: 100%; /* 確保全寬 */
+    padding: 10px;
+    background: #fff;
 }
 
 #user-input {
@@ -97,44 +79,27 @@ h2 {
     padding: 10px;
     border: 1px solid #ced4da;
     border-radius: 5px;
-    width: 100%;
 }
 
 #send-btn, #voice-btn {
-    padding: 10px;
-    flex-shrink: 0;
     width: 50px;
+    padding: 10px;
 }
 
-.loading {
-    display: none;
-    text-align: center;
-    margin-top: 10px;
-}
-
-/* 響應式設計 */
 @media (max-width: 768px) {
     .chat-container {
-        border-radius: 0;
-        height: 100%;
+        padding: 10px;
     }
 
-    .input-area {
-        flex-direction: column;
-        padding: 0;
-    }
-
-    #user-input, #send-btn, #voice-btn {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
     h2 {
         font-size: 1.2rem;
     }
 
-    .chat-container {
-        padding: 5px;
+    .input-area {
+        flex-direction: column;
+    }
+
+    #send-btn, #voice-btn {
+        width: 100%;
     }
 }
