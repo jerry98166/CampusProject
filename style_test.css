@@ -26,17 +26,13 @@ body {
 }
 
 .container {
-    width: 90%;             /* 左右佔 90% */
-    height: 100%;           /* 上下佔 100% */
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    margin: 0;
     position: relative;
-    padding: 20px;
-    overflow: hidden;
+    z-index: 2;
+    padding: 0;
+}
 
 .chat-container {
     background-color: rgba(255, 255, 255, 0.85);
@@ -163,10 +159,39 @@ h2 {
 
 /* 手機版響應式設計 */
 @media (max-width: 768px) {
-    .container {
-        width: 90%;         /* 保持左右 90% */
-        height: 100%;       /* 上下仍然佔滿 */
-        padding: 10px;      /* 減少內距，適合小螢幕 */
-        border-radius: 10px; /* 減小圓角 */
+    .chat-container {
+        width: 100%;
+        padding: 10px;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .chat-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .chat-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .chat-box {
+        height: 50vh;
+    }
+
+    .input-area {
+        flex-direction: column;
+        gap: 5px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #user-input, #send-btn, #voice-btn {
+        width: 100%;
+        margin: 0;
+    }
+
+    #send-btn, #voice-btn {
+        margin-top: 10px;
     }
 }
