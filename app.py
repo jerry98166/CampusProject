@@ -1,15 +1,14 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_community.document_loaders import PyPDFLoader  # 更新導入
+from langchain_community.vectorstores import FAISS  # 更新導入
+from langchain_community.embeddings import OpenAIEmbeddings  # 更新導入
 from langchain.chains import ConversationalRetrievalChain
-from langchain_community.chat_models import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI  # 更新導入
 from langchain.memory import ConversationBufferMemory
-from dotenv import load_dotenv
+from dotenv import load_dotenv  # 引入 dotenv
 import os
-from pyngrok import conf, ngrok
-import logging
+from pyngrok import conf, ngrok  # 引入 pyngrok
 
 # 載入 .env 檔案中的環境變數
 load_dotenv()
@@ -27,26 +26,13 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 if not openai_api_key:
     raise ValueError("金鑰未正確設定。請確保 .env 檔案中包含 OPENAI_API_KEY")
 
-# 向量資料庫檔案路徑
-vector_store_path = "/Users/gaomenglin/Desktop/university-query-platform/vector_store"
+# 載入 PDF 文件
+pdf_loader = PyPDFLoader("/Users/gaomenglin/Desktop/university-query-platform/cycu.pdf")
+documents = pdf_loader.load()
 
-# 檢查向量資料庫是否已經存在
-if os.path.exists(vector_store_path):
-    # 讀取已儲存的向量資料庫
-    vector_store = FAISS.load_local(vector_store_path, OpenAIEmbeddings(openai_api_key=openai_api_key))
-    logging.info("讀取已儲存的向量資料庫")
-else:
-    # 載入 PDF 文件
-    pdf_loader = PyPDFLoader("/Users/gaomenglin/Desktop/university-query-platform/cycu.pdf")
-    documents = pdf_loader.load()
-
-    # 建立向量資料庫
-    embedding = OpenAIEmbeddings(openai_api_key=openai_api_key)
-    vector_store = FAISS.from_documents(documents, embedding)
-
-    # 儲存向量資料庫
-    vector_store.save_local(vector_store_path)
-    logging.info("儲存新的向量資料庫")
+# 建立向量資料庫
+embedding = OpenAIEmbeddings(openai_api_key=openai_api_key)  # 傳入 API 金鑰
+vector_store = FAISS.from_documents(documents, embedding)
 
 # 創建檢索器
 retriever = vector_store.as_retriever()
@@ -56,7 +42,7 @@ memory = ConversationBufferMemory(memory_key="chat_history", return_messages=Tru
 
 # 創建一個帶有對話記憶的問答鏈
 qa_chain = ConversationalRetrievalChain.from_llm(
-    llm=ChatOpenAI(model="gpt-4", openai_api_key=openai_api_key), 
+    llm=ChatOpenAI(model="gpt-4", openai_api_key=openai_api_key),  # 使用 GPT-4，並傳入 API 金鑰
     retriever=retriever,
     memory=memory
 )
