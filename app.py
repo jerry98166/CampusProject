@@ -27,7 +27,7 @@ if not openai_api_key:
     raise ValueError("金鑰未正確設定。請確保 .env 檔案中包含 OPENAI_API_KEY")
 
 # 載入 PDF 文件
-pdf_loader = PyPDFLoader("/Users/gaomenglin/Desktop/university-query-platform/cycu.pdf")
+pdf_loader = PyPDFLoader("/Users/gaomenglin/Desktop/university-query-platform/cycu_merged.pdf")
 documents = pdf_loader.load()
 
 # 建立向量資料庫
