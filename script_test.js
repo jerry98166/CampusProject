@@ -1,6 +1,6 @@
 // 當頁面載入後，延遲 1 秒顯示歡迎訊息
-window.onload = function() {
-    setTimeout(function() {
+window.onload = function () {
+    setTimeout(function () {
         addMessage('bot', '哈囉！可以問我任何關於中原大學的問題～😊😊');
     }, 2000); // 延遲 1 秒 (2000 毫秒)
 };
@@ -14,6 +14,50 @@ document.getElementById('user-input').addEventListener('keydown', function (even
         sendMessage();  // 當按下Enter鍵時，發送訊息
     }
 });
+
+// 語音辨識功能
+if ('webkitSpeechRecognition' in window) {
+    const recognition = new webkitSpeechRecognition();
+    recognition.continuous = false; // 是否連續辨識
+    recognition.interimResults = false; // 是否返回中間結果
+    recognition.lang = 'zh-TW'; // 設定語言（繁體中文）
+
+    const voiceBtn = document.getElementById('voice-btn');
+    const userInput = document.getElementById('user-input');
+
+    // 當點擊語音按鈕時，開始語音辨識
+    voiceBtn.addEventListener('click', () => {
+        recognition.start();
+        voiceBtn.innerHTML = '<i class="fas fa-microphone-slash"></i> 辨識中...';
+        voiceBtn.disabled = true; // 防止重複啟動
+    });
+
+    // 當辨識結果返回時，將語音轉換成文字
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript; // 獲取辨識到的文字
+        userInput.value = transcript; // 將文字顯示在輸入框中
+        recognition.stop();
+        voiceBtn.innerHTML = '<i class="fas fa-microphone"></i> 語音輸入';
+        voiceBtn.disabled = false; // 重新啟用按鈕
+    };
+
+    // 當語音辨識結束
+    recognition.onend = () => {
+        voiceBtn.innerHTML = '<i class="fas fa-microphone"></i> 語音輸入';
+        voiceBtn.disabled = false;
+    };
+
+    // 處理語音辨識錯誤
+    recognition.onerror = (event) => {
+        console.error('語音辨識錯誤:', event.error);
+        alert('語音辨識失敗，請重試。');
+        recognition.stop();
+        voiceBtn.innerHTML = '<i class="fas fa-microphone"></i> 語音輸入';
+        voiceBtn.disabled = false;
+    };
+} else {
+    alert('您的瀏覽器不支援語音辨識功能，請嘗試使用 Chrome 瀏覽器。');
+}
 
 // 發送訊息的函式
 async function sendMessage() {
