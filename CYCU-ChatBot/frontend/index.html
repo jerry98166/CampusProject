@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="中原大學智能問答系統 - 快速查詢學校規章制度與相關資訊">
+    <meta name="keywords" content="中原大學,CYCU,問答系統,校園資訊">
+    <title>中原大學智能問答系統</title>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    
+    <!-- Mobile CSS -->
+    <link rel="stylesheet" media="(max-width: 768px)" href="assets/css/mobile.css">
+</head>
+<body>
+    <!-- 背景效果 -->
+    <div class="background"></div>
+    
+    <!-- 主容器 -->
+    <div class="container-fluid h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="chat-container">
+                    <!-- 聊天標題欄 -->
+                    <div class="chat-header">
+                        <div class="header-left">
+                            <img src="assets/images/cycu_logo.png" alt="中原大學校徽" class="header-logo">
+                            <div class="header-title-group">
+                                <h2 class="header-title">中原大學校園嚮導</h2>
+                                <p class="header-subtitle">法規 × 校務資訊智能助理</p>
+                            </div>
+                        </div>
+                        <div class="header-right">
+                            <div class="header-meta">
+                                <span class="status-pill">
+                                    <span class="status-dot"></span>
+                                    系統上線
+                                </span>
+                                <span class="status-pill" id="message-count-pill">
+                                    <i class="fas fa-comments"></i>
+                                    0 則訊息
+                                </span>
+                            </div>
+                            <button class="btn-icon" id="reset-btn" title="清除對話">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                            <button class="btn-icon" id="theme-toggle" title="切換主題">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 快捷提問 -->
+                    <div class="quick-prompts" id="quick-prompts">
+                        <button class="prompt-chip" data-prompt="中原大學學則有哪些重點？">
+                            <i class="fas fa-book"></i> 學則重點
+                        </button>
+                        <button class="prompt-chip" data-prompt="中原大學獎學金有哪些申請方式？">
+                            <i class="fas fa-award"></i> 獎學金申請
+                        </button>
+                        <button class="prompt-chip" data-prompt="學生請假的流程與規定是什麼？">
+                            <i class="fas fa-calendar-check"></i> 請假流程
+                        </button>
+                        <button class="prompt-chip" data-prompt="中原大學轉系需要符合哪些條件？">
+                            <i class="fas fa-route"></i> 轉系條件
+                        </button>
+                    </div>
+
+                    <!-- 聊天訊息區 -->
+                    <div class="chat-box" id="chat-box">
+                        <div class="chat-empty-state" id="chat-empty-state">
+                            <div class="empty-icon">
+                                <i class="fas fa-compass"></i>
+                            </div>
+                            <h3>準備好為你導航中原校園資訊</h3>
+                            <p>點選上方快捷提問，或直接輸入你的問題開始對話。</p>
+                        </div>
+                    </div>
+
+                    <!-- 輸入區域 -->
+                    <div class="input-area">
+                        <div class="input-wrapper">
+                            <textarea 
+                                id="user-input" 
+                                class="form-control" 
+                                placeholder="請輸入您的問題..." 
+                                rows="1"
+                                maxlength="1000"
+                            ></textarea>
+                            <div class="input-actions">
+                                <button class="btn btn-voice" id="voice-btn" title="語音輸入">
+                                    <i class="fas fa-microphone"></i>
+                                </button>
+                                <button class="btn btn-send" id="send-btn" title="發送">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="input-meta">
+                            <span class="typing-hint">Enter 送出 · Shift + Enter 換行</span>
+                            <span class="char-counter" id="char-counter">0/1000</span>
+                        </div>
+                    </div>
+
+                    <!-- 載入動畫 -->
+                    <div class="loading" id="loading">
+                        <div class="loading-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <p>正在思考中...</p>
+                    </div>
+
+                    <!-- 頁腳 -->
+                    <div class="chat-footer">
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle"></i> 
+                            本系統由 AI 驅動，僅供參考。如有疑問請洽相關單位。
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
